@@ -1,5 +1,9 @@
 
 
+## 1.1.0+4
+ October 29, 2021
+- Updated README.md.tmpl
+
 ## 1.1.0+3
  October 29, 2021
 - import 'package:{{projectName}}/src/controller.dart' in my_controller.dart.tmpl
