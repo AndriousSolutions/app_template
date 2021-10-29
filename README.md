@@ -1,4 +1,6 @@
-# mvc
+# {{projectName}}
+
+{{description}}
 
 ## Example App using the MVC Design Pattern.
 
@@ -21,3 +23,5 @@ android/app/build.gradle
 
 ### Introduction
 
+
+## How it works

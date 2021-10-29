@@ -1,4 +1,13 @@
 
+
+## 1.1.0+3
+ October 29, 2021
+- import 'package:{{projectName}}/src/controller.dart' in my_controller.dart.tmpl
+
+## 1.1.0+2
+ October 29, 2021
+- Removed sunny.png from pubspec.yaml.tmpl
+
 ## 1.1.0
  October 28, 2021
 - supportedLocales: I10n.supportedLocales,
