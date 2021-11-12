@@ -54,6 +54,7 @@ class _BuildAndroid extends StatelessWidget {
             onPressed: () async {
               final pop = await contact.onPressed();
               if (pop) {
+                await contact.model.getContacts();
                 Navigator.of(context).pop();
               }
             },

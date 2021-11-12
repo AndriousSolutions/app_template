@@ -133,8 +133,27 @@ class Phone extends FieldWidgets<Contact> with FormFields {
         onTap: onTap,
         onChanged: onChanged ?? (String? value) => state!.setState(() {}),
         dropItems:
-            dropItems ?? const ['home', 'work', 'landline', 'modile', 'other'],
+            dropItems ?? const ['home', 'work', 'landline', 'mobile', 'other'],
       );
+
+  @override
+  List<Map<String, dynamic>> mapItems<U extends FieldWidgets<Contact>>(
+      String key,
+      List<DataFieldItem>? items,
+      U Function(DataFieldItem dataItem) create,
+      [U? itemsObj]) {
+    //
+    final list = super.mapItems<U>(key, items, create, itemsObj);
+
+    //ignore: unnecessary_cast
+    for (int cnt = 0; cnt <= this.items!.length - 1; cnt++) {
+      //
+      final phone = this.items!.elementAt(cnt) as Phone;
+
+      list[cnt]['initValue'] = phone.initialValue;
+    }
+    return list;
+  }
 }
 
 class Email extends FieldWidgets<Contact> with FormFields {
@@ -173,7 +192,7 @@ class Email extends FieldWidgets<Contact> with FormFields {
         dropItems: dropItems ?? ['home', 'work', 'other'],
         onChanged: onChanged ??
             (String? value) {
-              App.refresh();
+              state!.setState(() {});
             },
       );
 }
