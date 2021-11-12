@@ -46,7 +46,8 @@ dependencies:
   flutter_material_color_picker: ^1.0.0
 
   # https://pub.dev/packages/mvc_application
-  mvc_application: ^7.0.0
+  mvc_application: ^8.0.0
+#      path: ../../packages/mvc_application
 
 dev_dependencies:
   flutter_test:
@@ -97,8 +98,8 @@ flutter:
     - templates/app/lib/src/view.dart.tmpl
     - templates/app/lib/src/app/controller.dart.tmpl
     - templates/app/lib/src/app/view.dart.tmpl
-    - templates/app/lib/src/app/controller/app_controller.dart.tmpl
     - templates/app/lib/src/app/controller/theme_controller.dart.tmpl
+    - templates/app/lib/src/app/controller/word_pair_timer.dart.tmpl
     - templates/app/lib/src/app/view/app.dart.tmpl
     - templates/app/lib/src/app/view/color_picker.dart.tmpl
     - templates/app/lib/src/app/view/menu/app_menu.dart.tmpl
@@ -106,26 +107,38 @@ flutter:
     - templates/app/lib/src/home/controller.dart.tmpl
     - templates/app/lib/src/home/model.dart.tmpl
     - templates/app/lib/src/home/view.dart.tmpl
-    - templates/app/lib/src/home/controller/my_controller.dart.tmpl
+    - templates/app/lib/src/home/controller/contacts_controller.dart.tmpl
+    - templates/app/lib/src/home/controller/counter_controller.dart.tmpl
+    - templates/app/lib/src/home/controller/template_controller.dart.tmpl
+    - templates/app/lib/src/home/controller/wordpairs_controller.dart.tmpl
     - templates/app/lib/src/home/model/settings.dart.tmpl
     - templates/app/lib/src/home/model/contacts/contact.dart.tmpl
     - templates/app/lib/src/home/model/contacts/contact_fields.dart.tmpl
     - templates/app/lib/src/home/model/contacts/contacts_db.dart.tmpl
-    - templates/app/lib/src/home/model/counter/my_model.dart.tmpl
-    - templates/app/lib/src/home/model/words/random_words.dart.tmpl
-    - templates/app/lib/src/home/view/contacts.dart.tmpl
-    - templates/app/lib/src/home/view/my_first_flutter_app.dart.tmpl
-    - templates/app/lib/src/home/view/my_home.dart.tmpl
-    - templates/app/lib/src/home/view/android/contacts/add_contact.dart.tmpl
-    - templates/app/lib/src/home/view/android/contacts/contact_details.dart.tmpl
-    - templates/app/lib/src/home/view/android/contacts/contacts_list.dart.tmpl
-    - templates/app/lib/src/home/view/android/counter/my_android.dart.tmpl
-    - templates/app/lib/src/home/view/android/words/my_first_flutter_app_android_state.dart.tmpl
-    - templates/app/lib/src/home/view/ios/contacts/add_contact.dart.tmpl
-    - templates/app/lib/src/home/view/ios/contacts/contact_details.dart.tmpl
-    - templates/app/lib/src/home/view/ios/contacts/contacts_list.dart.tmpl
-    - templates/app/lib/src/home/view/ios/counter/my_ios.dart.tmpl
-    - templates/app/lib/src/home/view/ios/words/my_first_flutter_app_ios_state.dart.tmpl
+    - templates/app/lib/src/home/model/counter/counter_model.dart.tmpl
+    - templates/app/lib/src/home/model/words/wordpairs_model.dart.tmpl
+    - templates/app/lib/src/home/view/contacts/add_contact.dart.tmpl
+    - templates/app/lib/src/home/view/contacts/contact_details.dart.tmpl
+    - templates/app/lib/src/home/view/contacts_view.dart.tmpl
+    - templates/app/lib/src/home/view/counter_view.dart.tmpl
+
+    - templates/counter_template/template_manifest.json
+    - templates/counter_template/pubspec.yaml.tmpl
+    - templates/counter_template/README.md.tmpl
+    - templates/counter_template/app/main.dart.tmpl
+    - templates/counter_template/app/lib/src/controller.dart.tmpl
+    - templates/counter_template/app/lib/src/model.dart.tmpl
+    - templates/counter_template/app/lib/src/view.dart.tmpl
+    - templates/counter_template/app/lib/src/app/controller.dart.tmpl
+    - templates/counter_template/app/lib/src/app/view.dart.tmpl
+    - templates/counter_template/app/lib/src/app/controller/app_controller.dart.tmpl
+    - templates/counter_template/app/lib/src/app/view/app_view.dart.tmpl
+    - templates/counter_template/app/lib/src/home/controller.dart.tmpl
+    - templates/counter_template/app/lib/src/home/model.dart.tmpl
+    - templates/counter_template/app/lib/src/home/view.dart.tmpl
+    - templates/counter_template/app/lib/src/home/controller/counter_controller.dart.tmpl
+    - templates/counter_template/app/lib/src/home/model/counter_model.dart.tmpl
+    - templates/counter_template/app/lib/src/home/view/counter_view.dart.tmpl
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a

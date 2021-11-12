@@ -23,7 +23,7 @@ class PopMenu extends AppPopupMenu<String> {
     ShapeBorder? shape,
     Color? color,
     bool? captureInheritedThemes,
-  })  : _con = MyController(),
+  })  : _con = TemplateController(),
         super(
           key: key ?? const Key('appMenuButton'),
           items: items,
@@ -46,7 +46,7 @@ class PopMenu extends AppPopupMenu<String> {
           captureInheritedThemes: captureInheritedThemes ?? false,
         );
 
-  final MyController _con;
+  final TemplateController _con;
 
   // Supply what the interface
   String get application => _con.application;

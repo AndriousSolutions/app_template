@@ -14,7 +14,7 @@ android/app/build.gradle
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.{YOUR DOMAIN}.{YOUR APP}"
-        minSdkVersion 16
+        minSdkVersion 19                 <---------- change from 16.
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

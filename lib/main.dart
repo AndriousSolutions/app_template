@@ -1,3 +1,3 @@
 import 'package:app_template/src/view.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(TemplateApp());

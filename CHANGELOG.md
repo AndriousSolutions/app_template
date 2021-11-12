@@ -1,4 +1,8 @@
 
+## 2.0.0
+ November 11, 2021
+- mvc_application ^8.0.0
+
 
 ## 1.1.0+4
  October 29, 2021

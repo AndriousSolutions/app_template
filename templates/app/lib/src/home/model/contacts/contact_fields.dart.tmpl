@@ -36,7 +36,6 @@ FormFields displayName(Contact contact) {
     display = '$display ${contact.familyName.value}';
   }
   display ??= '';
-
   return DisplayName(display, Text(display));
 }
 
@@ -132,7 +131,7 @@ class Phone extends FieldWidgets<Contact> with FormFields {
         items: items,
         mapItem: mapItem,
         onTap: onTap,
-        onChanged: onChanged ?? (String? value) => App.refresh(),
+        onChanged: onChanged ?? (String? value) => state!.setState(() {}),
         dropItems:
             dropItems ?? const ['home', 'work', 'landline', 'modile', 'other'],
       );

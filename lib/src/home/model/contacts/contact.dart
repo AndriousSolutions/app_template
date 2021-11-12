@@ -1,14 +1,12 @@
-import 'package:flutter/material.dart' show BuildContext, GlobalKey, FormState;
-
 import 'package:app_template/src/view.dart';
+
+import 'package:app_template/src/controller.dart';
 
 import 'contact_fields.dart';
 
 import 'contacts_db.dart';
 
-class Contact extends ContactEdit
-    with StateGetter
-    implements Comparable<Contact> {
+class Contact extends ContactEdit implements Comparable<Contact> {
   //
   Contact() {
     populate();
@@ -24,7 +22,6 @@ class Contact extends ContactEdit
 }
 
 class ContactEdit extends ContactList {
-  //
   ContactEdit() {
     model = ContactsDB();
   }
@@ -114,7 +111,7 @@ class ContactList extends ContactFields {
   }
 }
 
-class ContactFields {
+class ContactFields with StateGetter {
   //
   late FormFields _id,
       _displayName,
@@ -125,6 +122,36 @@ class ContactFields {
       _email,
       _company,
       _jobTitle;
+
+  /// Attach to a State object
+  @override
+  bool pushState([StateMVC? state]) {
+    _id.pushState(state);
+    _displayName.pushState(state);
+    _givenName.pushState(state);
+    _middleName.pushState(state);
+    _familyName.pushState(state);
+    _phone.pushState(state);
+    _email.pushState(state);
+    _company.pushState(state);
+    _jobTitle.pushState(state);
+    return super.pushState(state);
+  }
+
+  /// Detach from the State object
+  @override
+  bool popState() {
+    _id.popState();
+    _displayName.popState();
+    _givenName.popState();
+    _middleName.popState();
+    _familyName.popState();
+    _phone.popState();
+    _email.popState();
+    _company.popState();
+    _jobTitle.popState();
+    return super.popState();
+  }
 
   Id get id => _id as Id;
   set id(Id id) => _id = id;
