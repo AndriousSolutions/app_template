@@ -55,15 +55,17 @@ class _BuildAndroid extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute<void>(
-            builder: (BuildContext _) =>
-                InheritedTheme.captureAll(context, const AddContact()),
-          ))
-              .then((_) {
-            con.refresh();
-          });
+        onPressed: () async {
+          await Navigator.of(context).push(MaterialPageRoute<void>(
+            // builder: (BuildContext _) =>
+            //     InheritedTheme.captureAll(context, const AddContact()),
+            builder: (_) => const AddContact(),
+          ));
+          //     .then((_) {
+          //   con.refresh();
+          // });
+          /// Either use the 'then' clause or the 'async await' command.
+          con.refresh();
         },
         child: const Icon(Icons.add),
       ),
@@ -72,7 +74,7 @@ class _BuildAndroid extends StatelessWidget {
             ? const Center(child: CircularProgressIndicator())
             : ListView.builder(
                 itemCount: con.items?.length ?? 0,
-                itemBuilder: (BuildContext context, int index) {
+                itemBuilder: (_, int index) {
                   final contact = con.itemAt(index);
                   return contact!.displayName.onDismissible(
                     child: Container(
@@ -81,12 +83,14 @@ class _BuildAndroid extends StatelessWidget {
                       ),
                       child: ListTile(
                         onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute<void>(
-                            builder: (BuildContext _) =>
-                                ContactDetails(contact: contact),
-                            // InheritedTheme.captureAll(
-                            //     context, ContactDetails(contact: contact)),
-                          ));
+                          // Don't use the builder's context. Ignore with underscore.
+                          Navigator.of(context)
+                              .push(MaterialPageRoute<void>(
+                            builder: (_) => ContactDetails(contact: contact),
+                          ))
+                              .then((_) {
+                            state.setState(() {});
+                          });
                         },
                         leading: contact.displayName.circleAvatar,
                         title: contact.displayName.text,
@@ -146,7 +150,7 @@ class _BuildiOS extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).push(
                     CupertinoPageRoute<void>(
-                      builder: (BuildContext _) => const AddContact(),
+                      builder: (_) => const AddContact(),
                       // InheritedTheme.captureAll(
                       // context, const AddContact()),
                     ),
@@ -169,7 +173,7 @@ class _BuildiOS extends StatelessWidget {
           else
             SliverList(
               delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
+                (_, int index) {
                   final contact = con.itemAt(index);
                   return contact?.displayName.onDismissible(
                     child: Container(
@@ -183,11 +187,9 @@ class _BuildiOS extends StatelessWidget {
                         leading: contact.displayName.circleAvatar,
                         title: contact.displayName.text,
                         onTap: () {
-                          final context = App.context!;
                           Navigator.of(context, rootNavigator: true).push(
                             CupertinoPageRoute<void>(
-                              builder: (BuildContext _) =>
-                                  ContactDetails(contact: contact),
+                              builder: (_) => ContactDetails(contact: contact),
                               // InheritedTheme.captureAll(context,
                               //     ContactDetails(contact: contact)),
                             ),

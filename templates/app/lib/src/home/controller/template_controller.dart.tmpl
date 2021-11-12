@@ -1,12 +1,11 @@
-
-import 'dart:async';
+import 'dart:async' show unawaited;
 
 import 'package:{{projectName}}/src/controller.dart';
 
 import 'package:{{projectName}}/src/model.dart';
 
 // You can see 'at a glance' this Controller also 'talks to' the interface (View).
-import 'package:{{projectName}}/src/view.dart';
+import 'package:app_template/src/view.dart';
 
 class TemplateController extends AppController {
   factory TemplateController() => _this ??= TemplateController._();

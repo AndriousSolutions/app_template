@@ -1,8 +1,9 @@
 
-## 2.0.1
+## 2.0.1+02
  November 11, 2021
 - mvc_application ^8.0.0
 - deleting phone numbers
+- Updated app template
 
 ## 1.1.0+4
  October 29, 2021

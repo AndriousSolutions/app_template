@@ -4,7 +4,7 @@ import 'dart:core';
 
 import 'package:dbutils/sqlite_db.dart' show Database, SQLiteDB, Transaction;
 
-import 'package:{{projectName}}/src/view.dart' show DataFieldItem;
+import 'package:{{projectName}}/src/view.dart' show DataFieldItem, showBox;
 
 import 'contact.dart' show Contact;
 
@@ -132,6 +132,21 @@ class ContactsDB extends SQLiteDB {
 
         phone.addAll({'userid': id});
 
+        final phoneNumber = phone['phone'] as String;
+
+        if (phoneNumber.isEmpty) {
+          //
+          phone['phone'] = phone['initValue'];
+
+          final delete = await showBox(
+              text: 'Deleting this Phone number?',
+              context: contact.state!.context);
+
+          if (delete) {
+            phone.addAll({'deleted': 1});
+          }
+        }
+
         await _this!.saveMap('Phones', phone);
       }
     }
@@ -145,6 +160,20 @@ class ContactsDB extends SQLiteDB {
         }
 
         email.addAll({'userid': id});
+
+        final emailAddress = email['email'] as String;
+
+        if (emailAddress.isEmpty) {
+          //
+          email['phone'] = email['initValue'];
+
+          final delete = await showBox(
+              text: 'Deleting this email?', context: contact.state!.context);
+
+          if (delete) {
+            email.addAll({'deleted': 1});
+          }
+        }
 
         await _this!.saveMap('Emails', email);
       }

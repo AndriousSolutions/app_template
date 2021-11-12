@@ -38,6 +38,9 @@ class _DetailsState extends StateMVC<ContactDetails> {
           CupertinoPageRoute<void>(builder: (BuildContext context) => widget);
     }
     await Navigator.of(context).push(route);
+    final contacts = await contact!.model.getContacts();
+    this.contact = contacts
+        .firstWhere((contact) => contact.id.value == this.contact.id.value);
     setState(() {});
   }
 }
@@ -55,15 +58,26 @@ class _BuildAndroid extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: contact.displayName.text, actions: [
         TextButton(
-          onPressed: () {
-            showBox(text: 'Delete this contact?', context: context)
-                .then((bool delete) {
-              if (delete) {
-                contact.delete().then((_) {
-                  Navigator.of(context).pop();
-                });
-              }
-            });
+          onPressed: () async {
+            // Confirm the deletion
+            final delete =
+                await showBox(text: 'Delete this contact?', context: context);
+
+            if (delete) {
+              //
+              await contact.delete();
+
+              Navigator.of(context).pop();
+            }
+            // // A 'then' clause implementation.
+            // showBox(text: 'Delete this contact?', context: context)
+            //     .then((bool delete) {
+            //   if (delete) {
+            //     contact.delete().then((_) {
+            //       Navigator.of(context).pop();
+            //     });
+            //   }
+            // });
           },
           child: const Icon(Icons.delete, color: Colors.white),
         ),

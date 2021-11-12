@@ -4,7 +4,6 @@ description: {{description}}
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-{{^withPluginHook}}
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -16,11 +15,10 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
-{{/withPluginHook}}
+version: 2.0.1
 
 environment:
-  sdk: {{dartSdkVersionBounds}}
+  sdk: ">=2.12.0 <3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -49,6 +47,7 @@ dependencies:
 
   # https://pub.dev/packages/mvc_application
   mvc_application: ^8.0.0
+#      path: ../../packages/mvc_application
 
 dev_dependencies:
   flutter_test:
@@ -85,6 +84,61 @@ flutter:
 
   assets:
     - assets/i10n/i10n.csv
+
+    - templates/template_manifest.json
+    - templates/template_manifest - Original.json
+    - templates/app - Original/lib/main.dart.tmpl
+    - templates/app - Original/test/widget_test.dart.tmpl
+    - templates/app - Original/pubspec.yaml.tmpl
+    - templates/app - Original/README.md.tmpl
+    - templates/app/assets/i10n/i10n.csv.tmpl
+    - templates/app/lib/main.dart.tmpl
+    - templates/app/lib/src/controller.dart.tmpl
+    - templates/app/lib/src/model.dart.tmpl
+    - templates/app/lib/src/view.dart.tmpl
+    - templates/app/lib/src/app/controller.dart.tmpl
+    - templates/app/lib/src/app/view.dart.tmpl
+    - templates/app/lib/src/app/controller/theme_controller.dart.tmpl
+    - templates/app/lib/src/app/controller/word_pair_timer.dart.tmpl
+    - templates/app/lib/src/app/view/app.dart.tmpl
+    - templates/app/lib/src/app/view/color_picker.dart.tmpl
+    - templates/app/lib/src/app/view/menu/app_menu.dart.tmpl
+    - templates/app/lib/src/app/view/menu/iso_spinner.dart.tmpl
+    - templates/app/lib/src/home/controller.dart.tmpl
+    - templates/app/lib/src/home/model.dart.tmpl
+    - templates/app/lib/src/home/view.dart.tmpl
+    - templates/app/lib/src/home/controller/contacts_controller.dart.tmpl
+    - templates/app/lib/src/home/controller/counter_controller.dart.tmpl
+    - templates/app/lib/src/home/controller/template_controller.dart.tmpl
+    - templates/app/lib/src/home/controller/wordpairs_controller.dart.tmpl
+    - templates/app/lib/src/home/model/settings.dart.tmpl
+    - templates/app/lib/src/home/model/contacts/contact.dart.tmpl
+    - templates/app/lib/src/home/model/contacts/contact_fields.dart.tmpl
+    - templates/app/lib/src/home/model/contacts/contacts_db.dart.tmpl
+    - templates/app/lib/src/home/model/counter/counter_model.dart.tmpl
+    - templates/app/lib/src/home/model/words/wordpairs_model.dart.tmpl
+    - templates/app/lib/src/home/view/contacts/add_contact.dart.tmpl
+    - templates/app/lib/src/home/view/contacts/contact_details.dart.tmpl
+    - templates/app/lib/src/home/view/contacts_view.dart.tmpl
+    - templates/app/lib/src/home/view/counter_view.dart.tmpl
+
+    - templates/counter_template/template_manifest.json
+    - templates/counter_template/pubspec.yaml.tmpl
+    - templates/counter_template/README.md.tmpl
+    - templates/counter_template/app/main.dart.tmpl
+    - templates/counter_template/app/lib/src/controller.dart.tmpl
+    - templates/counter_template/app/lib/src/model.dart.tmpl
+    - templates/counter_template/app/lib/src/view.dart.tmpl
+    - templates/counter_template/app/lib/src/app/controller.dart.tmpl
+    - templates/counter_template/app/lib/src/app/view.dart.tmpl
+    - templates/counter_template/app/lib/src/app/controller/app_controller.dart.tmpl
+    - templates/counter_template/app/lib/src/app/view/app_view.dart.tmpl
+    - templates/counter_template/app/lib/src/home/controller.dart.tmpl
+    - templates/counter_template/app/lib/src/home/model.dart.tmpl
+    - templates/counter_template/app/lib/src/home/view.dart.tmpl
+    - templates/counter_template/app/lib/src/home/controller/counter_controller.dart.tmpl
+    - templates/counter_template/app/lib/src/home/model/counter_model.dart.tmpl
+    - templates/counter_template/app/lib/src/home/view/counter_view.dart.tmpl
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
