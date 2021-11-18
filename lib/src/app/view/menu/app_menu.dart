@@ -121,7 +121,12 @@ class PopMenu extends AppPopupMenu<String> {
           switchButtons: Settings.getLeftHanded(),
         ).show();
 
-//        App.refresh();
+        // If the current app is the 'counter' app
+        if (_con.counterApp) {
+          // Has to be initialized again for some reason??
+          _con.initTimer();
+        }
+
         break;
       case 'color':
         // Set the current colour.

@@ -9,8 +9,12 @@ import 'package:app_template/src/view.dart';
 
 class TemplateController extends AppController {
   factory TemplateController() => _this ??= TemplateController._();
-  TemplateController._() : super();
+  TemplateController._()
+      : wordPairsTimer = WordPairsController(),
+        super();
   static TemplateController? _this;
+
+  final WordPairsController wordPairsTimer;
 
   // Assign to the 'leading' widget on the interface.
   void leading() => changeUI();
@@ -52,13 +56,17 @@ class TemplateController extends AppController {
   final appNames = ['Counter', 'Word Pairs', 'Contacts'];
 
   Widget onHome() {
+    //
     final con = state?.controllerByType<WordPairsTimer>();
     // Turn off the timer
     con?.timer.cancel();
 
     _appCount = Prefs.getInt('appRun');
+
     final Key key = UniqueKey();
+
     Widget? widget;
+
     switch (appNames[_appCount]) {
       case 'Word Pairs':
         widget = WordPairs(key: AppState.homeKey, title: App.title!);
@@ -147,4 +155,10 @@ class TemplateController extends AppController {
         color: color,
         captureInheritedThemes: captureInheritedThemes,
       ).popupMenuButton;
+
+  /// Start up the timer
+  void initTimer() => wordPairsTimer.initTimer();
+
+  /// Cancel the timer
+  void cancelTimer() => wordPairsTimer.cancelTimer();
 }

@@ -9,15 +9,13 @@ class CounterController extends AppController {
   factory CounterController() => _this ??= CounterController._();
   CounterController._() : super() {
     //
-    _model = CounterModel();
+    _model = CounterModel(); // CounterModel(useDouble: true);
 
     /// Provide the 'timer' controller to the interface.
     wordPairsTimer = WordPairsController();
   }
   static CounterController? _this;
-
   late final CounterModel _model;
-
   late final WordPairsController wordPairsTimer;
 
   @override
@@ -30,6 +28,9 @@ class CounterController extends AppController {
 
   /// The 'View' is calling setState()
   void onPressed() => _model.onPressed();
+
+  /// The 'Controller' is calling the 'View' to call setState()
+//  void onPressed() => setState(() => _model.onPressed());
 
   /// Retrieve the app's own controller.
   TemplateController get appController =>

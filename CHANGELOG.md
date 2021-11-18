@@ -1,4 +1,14 @@
 
+## 2.1.0
+ November 18, 2021
+- if (_con.counterApp) {
+- App.useMaterial ? _buildAndroid(this) : _buildiOS(this);
+- Material(child: IconButton(
+- await Navigator.of(con.state!.context).push(
+- factory CounterModel({bool? useDouble}) =>
+- Application:, Solicitud:, Anwendung:, 应用:, заявка:, יישום:
+- void initTimer() => wordPairsTimer.initTimer();
+
 ## 2.0.1+02
  November 11, 2021
 - mvc_application ^8.0.0

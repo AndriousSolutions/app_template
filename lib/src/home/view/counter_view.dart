@@ -3,21 +3,18 @@ import 'package:app_template/src/view.dart';
 import 'package:app_template/src/controller.dart';
 
 class CounterPage extends StatefulWidget {
-  CounterPage({Key? key, this.title = 'Counter Page'})
-      : con = CounterController(),
-        super(key: key);
+  const CounterPage({Key? key, this.title = 'Counter Page'}) : super(key: key);
   final String title;
-  final CounterController con;
   @override
   //ignore: no_logic_in_create_state
-  State createState() => _CounterPageState(con);
+  State createState() => _CounterPageState();
 }
 
 /// Should always keep your State class 'hidden' with the leading underscore
 class _CounterPageState extends StateMVC<CounterPage> {
   // Constructor registers a Controller
-  _CounterPageState(CounterController controller) : super(controller) {
-    con = this.controller as CounterController;
+  _CounterPageState() : super(CounterController()) {
+    con = controller as CounterController;
   }
   late CounterController con;
 
@@ -197,7 +194,8 @@ class _BuildAndroid extends StatelessWidget {
           children: <Widget>[
             con.wordPair,
             const SizedBox(height: 30),
-            I10n.t('You have pushed the button this many times:'),
+            I10n.t('You have pushed the button this many times:',
+                style: const TextStyle(fontSize: 15)),
             Text(
               con.data,
               style: Theme.of(context).textTheme.headline4,

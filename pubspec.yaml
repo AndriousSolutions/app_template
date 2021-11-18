@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 2.0.1+02
+version: 2.1.0
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -29,7 +29,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -139,6 +138,25 @@ flutter:
     - templates/counter_template/app/lib/src/home/controller/counter_controller.dart.tmpl
     - templates/counter_template/app/lib/src/home/model/counter_model.dart.tmpl
     - templates/counter_template/app/lib/src/home/view/counter_view.dart.tmpl
+
+    - templates/contacts_template/app/pubspec.yaml.tmpl
+    - templates/contacts_template/app/README.md.tmpl
+    - templates/contacts_template/app/lib/main.dart.tmpl
+    - templates/contacts_template/app/lib/src/controller.dart.tmpl
+    - templates/contacts_template/app/lib/src/model.dart.tmpl
+    - templates/contacts_template/app/lib/src/view.dart.tmpl
+    - templates/contacts_template/app/lib/src/app/view.dart.tmpl
+    - templates/contacts_template/app/lib/src/app/view/app.dart.tmpl
+    - templates/contacts_template/app/lib/src/home/controller.dart.tmpl
+    - templates/contacts_template/app/lib/src/home/model.dart.tmpl
+    - templates/contacts_template/app/lib/src/home/view.dart.tmpl
+    - templates/contacts_template/app/lib/src/home/controller/contacts_controller.dart.tmpl
+    - templates/contacts_template/app/lib/src/home/model/contacts/contact.dart.tmpl
+    - templates/contacts_template/app/lib/src/home/model/contacts/contact_fields.dart.tmpl
+    - templates/contacts_template/app/lib/src/home/model/contacts/contacts_db.dart.tmpl
+    - templates/contacts_template/app/lib/src/home/view/contacts_view.dart.tmpl
+    - templates/contacts_template/app/lib/src/home/view/contacts/add_contact.dart.tmpl
+    - templates/contacts_template/app/lib/src/home/view/contacts/contact_details.dart.tmpl
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
