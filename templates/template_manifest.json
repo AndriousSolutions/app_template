@@ -5,7 +5,6 @@
         "templates/app/pubspec.yaml.tmpl",
         "templates/app/README.md.tmpl",
         "templates/app/test/widget_test.dart.tmpl",
-        "templates/app/winuwp.tmpl/.gitignore",
         "templates/app/assets/i10n/i10n.csv.tmpl",
         "templates/app/lib/main.dart.tmpl",
         "templates/app/lib/src/controller.dart.tmpl",

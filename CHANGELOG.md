@@ -1,4 +1,9 @@
 
+## 2.1.0+02
+ November 18, 2021
+- Corrected counter_model.dart
+- Corrected pubspec.yaml
+
 ## 2.1.0
  November 18, 2021
 - if (_con.counterApp) {
