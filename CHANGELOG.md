@@ -8,6 +8,7 @@
 - factory CounterModel({bool? useDouble}) =>
 - Application:, Solicitud:, Anwendung:, 应用:, заявка:, יישום:
 - void initTimer() => wordPairsTimer.initTimer();
+- update README.md
 
 ## 2.0.1+02
  November 11, 2021

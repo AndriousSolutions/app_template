@@ -90,6 +90,8 @@ flutter:
     - templates/app - Original/test/widget_test.dart.tmpl
     - templates/app - Original/pubspec.yaml.tmpl
     - templates/app - Original/README.md.tmpl
+    - templates/app/pubspec.yaml.tmpl
+    - templates/app/README.md.tmpl
     - templates/app/assets/i10n/i10n.csv.tmpl
     - templates/app/lib/main.dart.tmpl
     - templates/app/lib/src/controller.dart.tmpl
