@@ -1,6 +1,6 @@
-# {{projectName}}
+# Flutter App Template
 
-{{description}}
+Supply a template to generate a typical Flutter app
 
 ## Example App using the MVC Design Pattern.
 
