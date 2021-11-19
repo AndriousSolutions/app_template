@@ -21,7 +21,7 @@ android/app/build.gradle
         multiDexEnabled true             <---------- insert here.
     }
 
-# Follow this link to read this online: https://medium.com/p/dcaca1629e34/
+#### Follow this link to read this documentation online instead: https://medium.com/p/dcaca1629e34/
 
 ### Introduction
 As you know, the command, 'flutter create .', will create the de facto
