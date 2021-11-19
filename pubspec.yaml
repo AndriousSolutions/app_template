@@ -1,7 +1,9 @@
 name: app_template
 description: Create a Flutter App based on a standard design pattern.
+homepage: https://github.com/AndriousSolutions/app_template
+repository: https://github.com/AndriousSolutions/app_template
 
-version: 2.1.0+02
+version: 2.1.0+03
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -33,6 +35,10 @@ dependencies:
   # https://pub.dev/packages/mvc_application
   mvc_application: ^8.0.0
 #      path: ../../packages/mvc_application
+
+  # https://pub.dev/packages/i10n_translator/
+  # To prevent pub publish validation error.
+  i10n_translator: ^2.0.0
 
 dev_dependencies:
   flutter_test:

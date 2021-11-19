@@ -4,6 +4,10 @@
 # Ignore except for application packages
 pubspec.lock
 
+# Unity Library
+#**/android/unityLibrary
+#**/ios/unityLibrary
+
 # Flutter IDE files
 .packages
 .flutter-plugins
@@ -14,8 +18,6 @@ out/
 .gradle/
 .dart_tool/
 .pub-cache/
-.metadata
-
 # Ignore API documentation directory created by dartdoc:
 doc/api/
 
@@ -38,7 +40,7 @@ doc/api/
 !example/**
 
 # Explicitly include the example app
-!templates/**
+!template/**
 
 /bin/**
 /tmp/**
@@ -140,3 +142,5 @@ Info.plist
   @com.google.gson.annotations.SerializedName <fields>;
 }
 ##---------------End:   proguard configuration for Gson  ----------
+
+

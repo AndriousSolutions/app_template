@@ -1,8 +1,41 @@
 # Good to keep this file with the code.
 #.gitignore
 
+# Ignore the templates
+.metadata
+/dart_tool/
+/android/
+/build/
+/ios/
+/web/
+/lib/generated_plugin_registrant.dart
+/ccontacts_template.iml
+/pubspec.lock
+
+/contacts_template/dart_tool/
+/contacts_template/android/
+/contacts_template/build/
+/contacts_template/ios/
+/contacts_template/web/
+/contacts_template/lib/generated_plugin_registrant.dart
+/contacts_template/contacts_template.iml
+/contacts_template/pubspec.lock
+
+/counter_template/dart_tool/
+/counter_template/android/
+/counter_template/build/
+/counter_template/ios/
+/counter_template/web/
+/counter_template/lib/generated_plugin_registrant.dart
+/contacts_template/counter_template.iml
+/contacts_template/pubspec.lock
+
 # Ignore except for application packages
 pubspec.lock
+
+# Unity Library
+#**/android/unityLibrary
+#**/ios/unityLibrary
 
 # Flutter IDE files
 .packages
@@ -14,8 +47,6 @@ out/
 .gradle/
 .dart_tool/
 .pub-cache/
-.metadata
-
 # Ignore API documentation directory created by dartdoc:
 doc/api/
 
@@ -38,7 +69,7 @@ doc/api/
 !example/**
 
 # Explicitly include the example app
-!templates/**
+!template/**
 
 /bin/**
 /tmp/**
@@ -140,3 +171,5 @@ Info.plist
   @com.google.gson.annotations.SerializedName <fields>;
 }
 ##---------------End:   proguard configuration for Gson  ----------
+
+

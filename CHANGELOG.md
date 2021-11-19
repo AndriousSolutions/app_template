@@ -1,4 +1,9 @@
 
+## 2.1.0+03
+ November 18, 2021
+- Introduced .pubignore
+- LICENSE file
+
 ## 2.1.0+02
  November 18, 2021
 - Corrected counter_model.dart
