@@ -1,5 +1,7 @@
 import 'package:app_template/src/view.dart';
 
+import 'package:app_template/src/controller.dart';
+
 import 'package:app_template/src/home/controller/contacts_controller.dart'
     show ContactsController;
 
@@ -24,9 +26,11 @@ class _ContactListState extends StateMVC<ContactsList> {
   void initState() {
     super.initState();
     _title = App.title!;
+    appCon = TemplateController();
   }
 
   String? _title;
+  late TemplateController appCon;
 
   @override
   Widget build(BuildContext context) =>
@@ -36,6 +40,7 @@ class _ContactListState extends StateMVC<ContactsList> {
 Widget _buildAndroid(_ContactListState state) {
   //
   final con = state.con;
+  final appCon = state.appCon;
   return Scaffold(
     appBar: AppBar(
       title: Text(state._title ?? state.widget.title),
@@ -46,7 +51,7 @@ Widget _buildAndroid(_ContactListState state) {
           },
           child: const Icon(Icons.sort_by_alpha, color: Colors.white),
         ),
-        con.popupMenu(),
+        appCon.popupMenu(),
       ],
     ),
     floatingActionButton: FloatingActionButton(
@@ -112,6 +117,7 @@ Widget _buildAndroid(_ContactListState state) {
 Widget _buildiOS(_ContactListState state) {
   //
   final con = state.con;
+  final appCon = state.appCon;
   final widget = state.widget;
   final _theme = App.themeData;
   return CupertinoPageScaffold(
@@ -141,7 +147,7 @@ Widget _buildiOS(_ContactListState state) {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                con.popupMenu(),
+                appCon.popupMenu(),
               ],
             ),
           ),

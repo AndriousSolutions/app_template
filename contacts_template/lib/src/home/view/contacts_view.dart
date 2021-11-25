@@ -1,11 +1,8 @@
-import 'package:contacts_template/src/view.dart';
-
 import 'package:contacts_template/src/home/controller/contacts_controller.dart'
     show ContactsController;
-
 import 'package:contacts_template/src/home/view/contacts/add_contact.dart';
-
 import 'package:contacts_template/src/home/view/contacts/contact_details.dart';
+import 'package:contacts_template/src/view.dart';
 
 class ContactsList extends StatefulWidget {
   const ContactsList({Key? key, this.title = 'Contacts App'}) : super(key: key);
@@ -56,7 +53,7 @@ class _BuildAndroid extends StatelessWidget {
           //     .then((_) {
           //   con.refresh();
           // });
-          con.refresh();
+          await con.refresh();
         },
         child: const Icon(Icons.add),
       ),

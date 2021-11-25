@@ -2,8 +2,6 @@ import 'package:app_template/src/view.dart';
 
 import 'package:app_template/src/controller.dart';
 
-import 'package:app_template/src/home/model/words/wordpairs_model.dart';
-
 class WordPairs extends StatefulWidget {
   const WordPairs({
     Key? key,
@@ -22,6 +20,14 @@ class _WordPairsState extends StateMVC<WordPairs> {
   }
   late WordPairsController con;
 
+  @override
+  void initState() {
+    super.initState();
+    appCon = TemplateController();
+  }
+
+  late TemplateController appCon;
+
   /// Depending on the platform, run an 'Android' or 'iOS' style of Widget.
   @override
   Widget build(BuildContext context) => App.useMaterial
@@ -39,6 +45,7 @@ class _RandomWordsAndroid extends StatelessWidget {
   Widget build(BuildContext context) {
     final widget = state.widget;
     final con = state.con;
+    final appCon = state.appCon;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -48,7 +55,7 @@ class _RandomWordsAndroid extends StatelessWidget {
             icon: const Icon(Icons.list),
             onPressed: _pushSaved,
           ),
-          con.popupMenu(),
+          appCon.popupMenu(),
         ],
       ),
       body: ListView.builder(
@@ -99,11 +106,11 @@ class _RandomWordsiOS extends StatelessWidget {
   //
   const _RandomWordsiOS({Key? key, required this.state}) : super(key: key);
   final _WordPairsState state;
-
   @override
   Widget build(BuildContext context) {
     final widget = state.widget;
     final con = state.con;
+    final appCon = state.appCon;
     return CupertinoPageScaffold(
       child: CustomScrollView(
         slivers: <Widget>[
@@ -118,7 +125,7 @@ class _RandomWordsiOS extends StatelessWidget {
                   onPressed: _pushSaved,
                   child: const Icon(Icons.list),
                 ),
-                con.popupMenu(),
+                appCon.popupMenu(),
               ],
             ),
           ),

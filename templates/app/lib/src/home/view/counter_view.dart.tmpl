@@ -1,39 +1,36 @@
+import 'package:app_template/src/view.dart';
 
-import 'package:{{projectName}}/src/view.dart';
-
-import 'package:{{projectName}}/src/controller.dart';
+import 'package:app_template/src/controller.dart';
 
 class CounterPage extends StatefulWidget {
   const CounterPage({Key? key, this.title = 'Counter Page'}) : super(key: key);
   final String title;
   @override
-  //ignore: no_logic_in_create_state
   State createState() => _CounterPageState();
 }
 
 /// Should always keep your State class 'hidden' with the leading underscore
 class _CounterPageState extends StateMVC<CounterPage> {
-  // Constructor registers a Controller
   _CounterPageState() : super(CounterController()) {
     con = controller as CounterController;
   }
   late CounterController con;
 
-  // Merely for demonstration purposes. Erase if not using.
   /// The framework will call this method exactly once.
   /// Only when the [State] object is first created.
   @override
   void initState() {
     super.initState();
-    con.initTimer();
+    appCon = TemplateController();
   }
+
+  late TemplateController appCon;
 
   // Merely for demonstration purposes. Erase if not using.
   /// The framework calls this method whenever it removes this [State] object
   /// from the tree.
   @override
   void deactivate() {
-    con.timer.cancelTimer();
     super.deactivate();
   }
 
@@ -182,11 +179,12 @@ class _BuildAndroid extends StatelessWidget {
   Widget build(BuildContext context) {
     final widget = state.widget;
     final con = state.con;
+    final appCon = state.appCon;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
         actions: [
-          con.popupMenu(),
+          appCon.popupMenu(),
         ],
       ),
       body: Center(
@@ -227,10 +225,11 @@ class _BuildiOS extends StatelessWidget {
   Widget build(BuildContext context) {
     final widget = state.widget;
     final con = state.con;
+    final appCon = state.appCon;
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         middle: Text(widget.title),
-        trailing: con.popupMenu(),
+        trailing: appCon.popupMenu(),
       ),
       child: SafeArea(
         child: Padding(

@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:{{projectName}}/src/model.dart';
+import 'package:app_template/src/model.dart';
 
-import 'package:{{projectName}}/src/view.dart';
+import 'package:app_template/src/view.dart';
 
 import 'package:mvc_application/controller.dart';
 
@@ -17,10 +17,12 @@ class WordPairsTimer extends ControllerMVC {
     StateMVC? state,
   }) =>
       _this ??= WordPairsTimer._(seconds, duration, callback, count, state);
+
   WordPairsTimer._(
       this.seconds, this.duration, this.callback, this.count, StateMVC? state)
       : model = WordPairsModel(),
         super(state);
+
   static WordPairsTimer? _this;
   final int? seconds;
   final Duration? duration;
@@ -29,7 +31,7 @@ class WordPairsTimer extends ControllerMVC {
   final WordPairsModel model;
 
   late Timer timer;
-  late final TemplateView appStateObject;
+  TemplateView? appStateObject;
 
   final suggestions = <WordPair>[];
   int index = 0;
@@ -49,6 +51,12 @@ class WordPairsTimer extends ControllerMVC {
   }
 
   @override
+  void deactivate() {
+    timer.cancel();
+    super.deactivate();
+  }
+
+  @override
   void dispose() {
     timer.cancel();
     super.dispose();
@@ -60,26 +68,21 @@ class WordPairsTimer extends ControllerMVC {
     return super.didPopRoute();
   }
 
-  /// Called when the system puts the app in the background or returns the app to the foreground.
+  /// Called when the system puts the app in the background or returns
+  /// the app to the foreground.
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     //
     if (state == AppLifecycleState.resumed) {
       /// Create the Timer again.
       initTimer();
-    } else {
+    } else if (state == AppLifecycleState.paused) {
       /// Passing these possible values:
       /// AppLifecycleState.paused (may enter the suspending state at any time)
       /// AppLifecycleState.inactive (may be paused at any time)
       /// AppLifecycleState.suspending (Android only)
       timer.cancel();
     }
-  }
-
-  @override
-  void deactivate() {
-    /// Stop the timer. Don't need it to still be running in resident memory
-    timer.cancel();
   }
 
   /// If the value of the object, obj, changes, this builder() is called again
@@ -100,6 +103,9 @@ class WordPairsTimer extends ControllerMVC {
         return widget;
       });
 
+//  Widget get wordPair => _WordPair(this);
+  String _wordPair = '';
+
   void _getWordPair() {
     //
     try {
@@ -113,7 +119,16 @@ class WordPairsTimer extends ControllerMVC {
 
       /// Changing the 'dataObject' will call the SetState class implemented above
       /// and only that widget. Only it will be rebuilt; not the whole widget tree.
-      appStateObject.dataObject = twoWords.asString;
+      appStateObject?.dataObject = twoWords.asString;
+
+      /// Alternate approach uses inheritWidget() and setStatesInherited() funtions.
+      _wordPair = twoWords.asString;
+
+      /// This calls the framework's InheritedWidget to rebuild
+      // appStateObject?.setStatesInherited();
+      // appStateObject?.inheritedNeedsBuild();
+
+//      appStateObject?.inheritedNeedsBuild(_wordPair);
     } catch (ex) {
       // Record the error.
       getError(ex);
@@ -170,4 +185,34 @@ class WordPairsTimer extends ControllerMVC {
 
   /// Cancel the timer
   void cancelTimer() => timer.cancel();
+}
+
+/// Alternate approach to spontaneous rebuilds using the framework's InheritedWidget.
+/// This approach uses inheritWidget() and setStatesInherited() functions.
+/// This class is assigned to the getter, wordPair.
+class _WordPair extends StatelessWidget {
+  const _WordPair(this.con, {Key? key}) : super(key: key);
+  final WordPairsTimer con;
+  @override
+  Widget build(BuildContext context) {
+    /// This is where the magic happens.
+    /// This Widget becomes a dependent of an InheritedWidget deep in the framework.
+    con.appStateObject?.inheritWidget(context);
+
+    // String data;
+    //
+    // if (con.appStateObject?.dataObject is String) {
+    //   data = con.appStateObject?.dataObject as String;
+    // } else {
+    //   data = con._wordPair;
+    // }
+
+    return Text(
+      con._wordPair, //data,
+      style: TextStyle(
+        color: Colors.red,
+        fontSize: Theme.of(context).textTheme.headline4!.fontSize,
+      ),
+    );
+  }
 }
