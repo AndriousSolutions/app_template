@@ -1,10 +1,11 @@
 
-## 2.2.0
+## 2.2.0+02
  November 24, 2021
 - Widget popupMenu({
 - appCon.popupMenu()
 - wordPairsTimer = WordPairsTimer();
 - if (state == AppLifecycleState.paused) {
+- corrected .tmpl files
 
 ## 2.1.0+03
  November 18, 2021

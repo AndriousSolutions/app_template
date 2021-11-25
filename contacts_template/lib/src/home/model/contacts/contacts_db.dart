@@ -4,8 +4,7 @@ import 'dart:core';
 
 import 'package:dbutils/sqlite_db.dart' show Database, SQLiteDB, Transaction;
 
-import 'package:contacts_template/src/view.dart'
-    show DataFieldItem, showBox;
+import 'package:contacts_template/src/view.dart' show DataFieldItem, showBox;
 
 import 'contact.dart' show Contact;
 
