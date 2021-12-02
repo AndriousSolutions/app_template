@@ -1,4 +1,6 @@
 ///
+import 'dart:ui' as ui show TextHeightBehavior;
+
 import 'package:{{projectName}}/src/model.dart';
 
 import 'package:{{projectName}}/src/view.dart';
@@ -13,19 +15,52 @@ class CounterController extends ControllerMVC {
         super();
   static CounterController? _this;
 
+  /// The data source controller.
   final CounterModel model;
 
   /// The counter
   String get counter => model.data;
 
   /// The 'View' is calling setState()
-  void onPressed() => model.onPressed();
+  void onPressed() {
+    //
+    model.onPressed();
 
-  /// The 'Controller is calling setState()
-//  void onPressed() => setState(() => _model.onPressed());
+    /// Cause the framework's InheritedWidget and any of its dependencies to rebuild.
+    App.vw?.inheritedNeedsBuild();
+  }
 
-  // Retrieve the 'data source.' Unknown to the Interface.
-  String get data => model.whatever;
+  Widget text({
+    Key? key,
+    TextStyle? style,
+    StrutStyle? strutStyle,
+    TextAlign? textAlign,
+    TextDirection? textDirection,
+    Locale? locale,
+    bool? softWrap,
+    TextOverflow? overflow,
+    double? textScaleFactor,
+    int? maxLines,
+    String? semanticsLabel,
+    TextWidthBasis? textWidthBasis,
+    ui.TextHeightBehavior? textHeightBehavior,
+  }) =>
+      _CountText(
+        key,
+        this,
+        style,
+        strutStyle,
+        textAlign,
+        textDirection,
+        locale,
+        softWrap,
+        overflow,
+        textScaleFactor,
+        maxLines,
+        semanticsLabel,
+        textWidthBasis,
+        textHeightBehavior,
+      );
 
   /// The remaining functions below are all optional.
   /// They hook into the State object associated with this Controller if any.
@@ -37,15 +72,12 @@ class CounterController extends ControllerMVC {
     /// The framework will call this method exactly once.
     /// Only when the [StateMVC] object is first created.
     super.initState();
-    model.initState();
   }
 
   @override
   void dispose() {
     /// The framework calls this method when this [StateMVC] object will never
     /// build again.
-
-    // @mustCallSuper will require this call.
     super.dispose();
   }
 
@@ -202,5 +234,60 @@ class CounterController extends ControllerMVC {
     /// This is the same as the setState() functions.
     /// For those accustom to the 'Provider' approach.
     super.notifyListeners();
+  }
+}
+
+/// A Widget that contains the enclosed controller and
+/// link to the framework's InheritedWidget.
+class _CountText extends StatelessWidget {
+  _CountText(
+    Key? key,
+    this.con,
+    this.style,
+    this.strutStyle,
+    this.textAlign,
+    this.textDirection,
+    this.locale,
+    this.softWrap,
+    this.overflow,
+    this.textScaleFactor,
+    this.maxLines,
+    this.semanticsLabel,
+    this.textWidthBasis,
+    this.textHeightBehavior,
+  ) : super(key: key);
+  final CounterController con;
+  final TextStyle? style;
+  final StrutStyle? strutStyle;
+  final TextAlign? textAlign;
+  final TextDirection? textDirection;
+  final Locale? locale;
+  final bool? softWrap;
+  final TextOverflow? overflow;
+  final double? textScaleFactor;
+  final int? maxLines;
+  final String? semanticsLabel;
+  final TextWidthBasis? textWidthBasis;
+  final ui.TextHeightBehavior? textHeightBehavior;
+
+  @override
+  Widget build(context) {
+    /// Link to the framework's InheritedWidget
+    App.vw?.inheritWidget(context);
+    return Text(
+      con.counter,
+      style: style,
+      strutStyle: strutStyle,
+      textAlign: textAlign,
+      textDirection: textDirection,
+      locale: locale,
+      softWrap: softWrap,
+      overflow: overflow,
+      textScaleFactor: textScaleFactor,
+      maxLines: maxLines,
+      semanticsLabel: semanticsLabel,
+      textWidthBasis: textWidthBasis,
+      textHeightBehavior: textHeightBehavior,
+    );
   }
 }

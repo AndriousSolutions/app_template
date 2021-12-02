@@ -3,7 +3,7 @@ description: Create a Flutter App based on a standard design pattern using third
 homepage: https://github.com/AndriousSolutions/app_template
 repository: https://github.com/AndriousSolutions/app_template
 
-version: 2.2.0+03
+version: 2.3.0
 
 environment:
   sdk: ">=2.12.0 <3.0.0"

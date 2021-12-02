@@ -1,5 +1,5 @@
 ///
-import 'package:{{projectName}}/src/model.dart';
+import 'package:counter_template/src/model.dart';
 
 /// Note, this class extends no other class.
 /// It's to be used as your app's data source, and who knows what that will be.

@@ -31,7 +31,7 @@ dependencies:
   # MVC architecture framework.
   # https://pub.dev/packages/mvc_application
   mvc_application: ^8.0.0
- #   path: ../../../packages/mvc_application
+#    path: ../../../packages/mvc_application
 
 dev_dependencies:
   flutter_test:

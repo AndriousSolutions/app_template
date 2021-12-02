@@ -85,6 +85,7 @@ Widget _buildAndroid(_ContactListState state) {
                             .push(MaterialPageRoute<void>(
                           builder: (_) => ContactDetails(contact: contact),
                         ));
+                        await con.getContacts();
                         con.state!.setState(() {});
                       },
                       leading: contact.displayName.circleAvatar,
@@ -121,19 +122,21 @@ Widget _buildiOS(_ContactListState state) {
   final widget = state.widget;
   final _theme = App.themeData;
   return CupertinoPageScaffold(
-    child: Material(
-      child: CustomScrollView(
-        semanticChildCount: 5,
-        slivers: <Widget>[
-          CupertinoSliverNavigationBar(
-            largeTitle: Text(state._title ?? widget.title),
-            leading: IconButton(
+    child: CustomScrollView(
+      semanticChildCount: 5,
+      slivers: <Widget>[
+        CupertinoSliverNavigationBar(
+          largeTitle: Text(state._title ?? widget.title),
+          leading: Material(
+            child: IconButton(
               icon: const Icon(Icons.sort_by_alpha),
               onPressed: () {
                 con.sort();
               },
             ),
-            middle: IconButton(
+          ),
+          middle: Material(
+            child: IconButton(
               icon: const Icon(Icons.add),
               onPressed: () async {
                 await Navigator.of(con.state!.context)
@@ -143,72 +146,73 @@ Widget _buildiOS(_ContactListState state) {
                 con.refresh();
               },
             ),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                appCon.popupMenu(),
-              ],
-            ),
           ),
-          if (con.items == null)
-            const Center(
-              child: CircularProgressIndicator(),
-            )
-          else
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (_, int index) {
-                  final contact = con.itemAt(index);
-                  return contact?.displayName.onDismissible(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: _theme?.canvasColor,
-                        border: Border(
-                          bottom: BorderSide(color: _theme!.dividerColor),
-                        ),
-                      ),
-                      child: CupertinoListTile(
-                        leading: contact.displayName.circleAvatar,
-                        title: contact.displayName.text,
-                        onTap: () async {
-                          await Navigator.of(con.state!.context)
-                              .push(MaterialPageRoute<void>(
-                            builder: (_) => ContactDetails(contact: contact),
-                          ));
-                          con.state!.setState(() {});
-                        },
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              appCon.popupMenu(),
+            ],
+          ),
+        ),
+        if (con.items == null)
+          const Center(
+            child: CircularProgressIndicator(),
+          )
+        else
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (_, int index) {
+                final contact = con.itemAt(index);
+                return contact?.displayName.onDismissible(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: _theme?.canvasColor,
+                      border: Border(
+                        bottom: BorderSide(color: _theme!.dividerColor),
                       ),
                     ),
-                    dismissed: (DismissDirection direction) {
-                      con.deleteItem(index);
-                      final action = (direction == DismissDirection.endToStart)
-                          ? 'deleted'
-                          : 'archived';
-                      App.snackBar(
-                        duration: const Duration(milliseconds: 8000),
-                        content: Text('You $action an item.'),
-                        action: SnackBarAction(
-                            label: 'UNDO',
-                            onPressed: () {
-                              contact.undelete();
-                              state.refresh();
-                            }),
-                      );
-                    },
-                  );
-                },
-                childCount: con.items?.length,
-                semanticIndexCallback: (Widget widget, int localIndex) {
-                  if (localIndex.isEven) {
-                    return localIndex ~/ 2;
-                  }
-                  return null;
-                },
-              ),
+                    child: CupertinoListTile(
+                      leading: contact.displayName.circleAvatar,
+                      title: contact.displayName.text,
+                      onTap: () async {
+                        await Navigator.of(con.state!.context)
+                            .push(MaterialPageRoute<void>(
+                          builder: (_) => ContactDetails(contact: contact),
+                        ));
+                        await con.getContacts();
+                        con.state!.setState(() {});
+                      },
+                    ),
+                  ),
+                  dismissed: (DismissDirection direction) {
+                    con.deleteItem(index);
+                    final action = (direction == DismissDirection.endToStart)
+                        ? 'deleted'
+                        : 'archived';
+                    App.snackBar(
+                      duration: const Duration(milliseconds: 8000),
+                      content: Text('You $action an item.'),
+                      action: SnackBarAction(
+                          label: 'UNDO',
+                          onPressed: () {
+                            contact.undelete();
+                            state.refresh();
+                          }),
+                    );
+                  },
+                );
+              },
+              childCount: con.items?.length,
+              semanticIndexCallback: (Widget widget, int localIndex) {
+                if (localIndex.isEven) {
+                  return localIndex ~/ 2;
+                }
+                return null;
+              },
             ),
-        ],
-      ),
+          ),
+      ],
     ),
   );
 }

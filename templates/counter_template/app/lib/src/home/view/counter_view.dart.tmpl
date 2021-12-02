@@ -195,30 +195,26 @@ class _CounterAndroid extends StatelessWidget {
   Widget build(BuildContext context) {
     final widget = state.widget;
     final con = state.con;
+    final appCon = App.vw!.con as AppController;
     return Scaffold(
-      appBar: AppBar(title: Text(widget._title)),
+      appBar: AppBar(
+        title: Text(widget._title),
+        actions: [appCon.popupmenu],
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text('You have pushed the button this many times:'),
             Column(children: [
-              Text(
-                con.counter,
-                style: Theme.of(context).textTheme.headline4,
-              ),
-              SizedBox(),
-              Text(con.data),
+              con.text(style: Theme.of(context).textTheme.headline4),
             ]),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         key: const Key('IncrementButton'),
-        onPressed: () {
-          // This controller calls the view to update the interface
-          con.setState(con.onPressed);
-        },
+        onPressed: con.onPressed,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
@@ -236,27 +232,43 @@ class _CounteriOS extends StatelessWidget {
   Widget build(BuildContext context) {
     final widget = state.widget;
     final con = state.con;
+    final appCon = App.vw!.con as AppController;
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         middle: Text(widget._title),
-        trailing: CupertinoButton(
-          child: Icon(CupertinoIcons.add_circled),
-          onPressed: () {
-            con.setState(con.onPressed);
-          },
-          padding: EdgeInsets.zero,
-        ),
+        trailing: appCon.popupmenu,
       ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text('You have pushed the button this many times:'),
-            Text(
-              con.counter,
-              style: Theme.of(context).textTheme.headline4,
+      child: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 200, right: 20, bottom: 25),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('You have pushed the button this many times:'),
+                con.text(style: Theme.of(context).textTheme.headline4),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: App.themeData?.primaryColor,
+                      ),
+                      child: CupertinoButton(
+                        key: const Key('IncrementButton'),
+                        onPressed: con.onPressed,
+                        child: const Icon(
+                          Icons.add,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

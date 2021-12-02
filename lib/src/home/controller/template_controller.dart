@@ -43,21 +43,22 @@ class TemplateController extends AppController {
     Prefs.setBool('switchUI', switchUI);
   }
 
-  /// Indicate if the Words app is to run.
-  bool get wordsApp => appNames[_appCount] == 'Word Pairs';
-
   /// Indicate if the Counter app is to run.
-  bool get counterApp => appNames[_appCount] == 'Counter';
+  bool get counterApp => _appNames[_appCount] == 'Counter';
+
+  /// Indicate if the Words app is to run.
+  bool get wordsApp => _appNames[_appCount] == 'Word Pairs';
 
   /// Indicate if the Contacts app is to run.
-  bool get contactsApp => appNames[_appCount] == 'Contacts';
+  bool get contactsApp => _appNames[_appCount] == 'Contacts';
 
   int _appCount = 0;
-  final appNames = ['Counter', 'Word Pairs', 'Contacts'];
+  final _appNames = ['Counter', 'Word Pairs', 'Contacts'];
 
   Widget onHome() {
     //
     final con = state?.controllerByType<WordPairsTimer>();
+
     // Turn off the timer
     con?.timer.cancel();
 
@@ -67,7 +68,7 @@ class TemplateController extends AppController {
 
     Widget? widget;
 
-    switch (appNames[_appCount]) {
+    switch (_appNames[_appCount]) {
       case 'Word Pairs':
         widget = WordPairs(key: AppState.homeKey, title: App.title!);
         break;
@@ -84,23 +85,24 @@ class TemplateController extends AppController {
   }
 
   // Supply what the interface
-  String get application => appNames[_appCount];
+  String get application => _appNames[_appCount];
 
   /// Switch to the other application.
   void changeApp([String? appName = '']) {
+    //
     if (appName == null ||
         appName.isEmpty ||
-        !appNames.contains(appName.trim())) {
+        !_appNames.contains(appName.trim())) {
       //
       _appCount++;
-      if (_appCount == appNames.length) {
+      if (_appCount == _appNames.length) {
         _appCount = 0;
       }
     } else {
-      _appCount = appNames.indexOf(appName.trim());
+      _appCount = _appNames.indexOf(appName.trim());
     }
 
-    unawaited(Prefs.setBool('words', appNames[_appCount] == 'Word'));
+    unawaited(Prefs.setBool('words', _appNames[_appCount] == 'Word'));
 
     unawaited(Prefs.setInt('appRun', _appCount));
 
@@ -113,10 +115,10 @@ class TemplateController extends AppController {
     App.refresh();
   }
 
-  /// Retrieve the app's own controller.
-  TemplateController get appController =>
-      _appController ??= App.vw!.con as TemplateController;
-  TemplateController? _appController;
+  // /// Retrieve the app's own controller.
+  // TemplateController get appController =>
+  //     _appController ??= App.vw!.con as TemplateController;
+  // TemplateController? _appController;
 
   /// Supply the app's popupmenu
   Widget popupMenu({

@@ -1,4 +1,9 @@
 
+## 2.3.0
+ November 30, 2021
+- New tests under test/
+- CLOSE,CLOSE,FERMER,CERRAR,SCHLIESSEN,关闭,БЛИЗКО,סגור
+
 ## 2.2.0+03
  November 24, 2021
 - Widget popupMenu({

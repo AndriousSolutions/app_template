@@ -1,30 +1,72 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility that Flutter provides. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
-
-import 'package:app_template/src/app/view.dart';
+///
+import 'src/view.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
+  /// Define a test. The TestWidgets function also provides a WidgetTester
+  /// to work with. The WidgetTester allows you to build and interact
+  /// with widgets in the test environment.
+  testWidgets('app_template testing', (WidgetTester tester) async {
+    //
     await tester.pumpWidget(TemplateApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    /// Flutter won’t automatically rebuild your widget in the test environment.
+    /// Use pump() or pumpAndSettle() to ask Flutter to rebuild the widget.
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    /// pumpAndSettle() waits for all animations to complete.
+    await tester.pumpAndSettle();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    final con = TemplateController();
+
+    // if (App.useCupertino) {
+    //   /// Switch to Material
+    //   await openInterfaceMenu(tester);
+    // }
+
+    int cnt = 1;
+    while (cnt <= 3) {
+      switch (con.application) {
+        case 'Counter':
+
+          /// Counter app testing
+          await counterTest(tester);
+          break;
+        case 'Word Pairs':
+
+          /// Random Word Pairs app
+          await wordsTest(tester);
+          break;
+        case 'Contacts':
+
+          /// Random Word Pairs app
+          await contactsTest(tester);
+          break;
+      }
+
+      /// Switch the app programmatically.
+      // con.changeApp();
+      /// Switch the app through the popupmenu
+      await openApplicationMenu(tester);
+
+      /// Wait for the transition in the Interface
+      await tester.pumpAndSettle();
+
+      cnt++;
+    }
+
+    /// Open the Locale window
+    await openLocaleMenu(tester);
+
+    /// Open About menu
+    await openAboutMenu(tester);
+
+    /// Switch the Interface
+    await openInterfaceMenu(tester);
+
+    /// WordPairs App Model Unit Testing
+    await testTemplateController(tester);
+
+    await wordPairsModelTest(tester);
+
+    reportTestErrors();
   });
 }

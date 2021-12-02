@@ -8,8 +8,6 @@ class CounterApp extends AppMVC {
   /// just so you see that they exist.
   CounterApp()
       : super(
-          con: AppController(),
-//          con: CounterAppController(),
           key: null,
           loadingScreen: null,
           errorHandler: null,
@@ -26,12 +24,6 @@ class CounterApp extends AppMVC {
   /// Your app's not instantiated until all the Error Handling is in place.
   @override
   AppState createState() => CounterAppView();
-
-  //todo: onError() can't be called in the StatefulWidget
-  /// Calls the 'AppController's onError() function
-  /// This function is unique to the AppController's parent class, AppConMVC.
-  // @override
-  // void onError(FlutterErrorDetails details) => super.onError(details);
 }
 
 class CounterAppView extends AppState {
@@ -45,7 +37,7 @@ class CounterAppView extends AppState {
       : super(
           key: null,
           home: const CounterHome(),
-          con: CounterAppController(),
+          con: AppController(),
           controllers: null,
           object: null,
           navigatorKey: null,
@@ -67,7 +59,7 @@ class CounterAppView extends AppState {
           supportedLocales: null,
           useMaterial: null, // true,
           useCupertino: null, // true,
-          switchUI: null, // true,
+          switchUI: Prefs.getBool('switchUI'),
           debugShowMaterialGrid: null,
           showPerformanceOverlay: null,
           checkerboardRasterCacheImages: null,
