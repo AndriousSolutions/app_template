@@ -17,6 +17,7 @@ Future<void> openInterfaceMenu(WidgetTester tester) async {
   expect(interface, findsOneWidget, reason: _location);
 
   await tester.tap(interface);
+  await tester.pump();
 
   /// Wait for the transition of the Interface
   await tester.pumpAndSettle();

@@ -1,12 +1,14 @@
 ///
 import '../view.dart';
 
-//import 'package:app_template/src/home/model/contacts/contact_fields.dart';
-
 String _location = '========================== contacts_test.dart';
 
 /// Testing the Contacts app
 Future<void> contactsTest(WidgetTester tester) async {
+  //
+  // Delete the last contact entered
+  await _deleteContact(tester);
+
   // Tap the '+' icon and trigger a frame.
   await tester.tap(find.byIcon(Icons.add));
 
@@ -63,5 +65,60 @@ Future<void> contactsTest(WidgetTester tester) async {
 
   await tester.pumpAndSettle();
   await tester.pumpAndSettle();
+  await tester.pumpAndSettle();
+}
+
+/// Delete a contact if any
+Future<void> _deleteContact(WidgetTester tester) async {
+  //
+  final con = ContactsController();
+
+  // If there are no contacts
+  if (con.items == null || con.items!.isEmpty) {
+    return;
+  }
+
+  Finder finder;
+
+  if (App.useMaterial) {
+    //
+    finder = find.byType(ListTile, skipOffstage: false);
+
+    expect(finder, findsWidgets, reason: _location);
+
+    await tester.tap(finder.first);
+    await tester.pump();
+  } else {
+    //
+    finder = find.byWidgetPredicate(
+        (Widget widget) => widget is GestureDetector && widget.child is Row,
+        description: 'a CupertinoListTile widget',
+        skipOffstage: false);
+
+    expect(finder, findsWidgets, reason: _location);
+
+    // Retrieve the widget
+    final tile = tester.firstWidget<GestureDetector>(finder);
+
+    tile.onTap!();
+  }
+  await tester.pumpAndSettle();
+
+  final deleteButton = find.widgetWithIcon(
+      App.useMaterial ? TextButton : IconButton, Icons.delete,
+      skipOffstage: false);
+
+  expect(deleteButton, findsOneWidget, reason: _location);
+
+  await tester.tap(deleteButton);
+  await tester.pump();
+  await tester.pumpAndSettle();
+
+  // Find the appropriate button even if translated.
+  final button = find.widgetWithText(
+      App.useMaterial ? TextButton : CupertinoDialogAction, 'OK');
+  expect(button, findsOneWidget, reason: _location);
+  await tester.tap(button);
+  await tester.pump();
   await tester.pumpAndSettle();
 }

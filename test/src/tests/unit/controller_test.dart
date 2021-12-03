@@ -17,7 +17,7 @@ Future<void> testTemplateController(WidgetTester tester) async {
 
   con.changeApp('Counter');
 
-  tester.pumpAndSettle();
+  await tester.pumpAndSettle();
 
   if (!con.counterApp) {
     fail('Failed to switch app. $_location');

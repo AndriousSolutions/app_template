@@ -17,12 +17,10 @@ void main() {
 
     final con = TemplateController();
 
-    // if (App.useCupertino) {
-    //   /// Switch to Material
-    //   await openInterfaceMenu(tester);
-    // }
-
+//    for (var interface = 1; interface <= 2; interface++) {
+    //
     int cnt = 1;
+
     while (cnt <= 3) {
       switch (con.application) {
         case 'Counter':
@@ -37,7 +35,7 @@ void main() {
           break;
         case 'Contacts':
 
-          /// Random Word Pairs app
+          /// Contacts app
           await contactsTest(tester);
           break;
       }
@@ -61,11 +59,15 @@ void main() {
 
     /// Switch the Interface
     await openInterfaceMenu(tester);
+//    }
+
+    /// Unit testing does not involve integration or widget testing.
 
     /// WordPairs App Model Unit Testing
-    await testTemplateController(tester);
-
     await wordPairsModelTest(tester);
+
+    /// Unit testing the App's controller object
+    await testTemplateController(tester);
 
     reportTestErrors();
   });

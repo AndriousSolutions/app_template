@@ -116,31 +116,32 @@ class _BuildiOS extends StatelessWidget {
     // Dart allows for local function declarations
     onTap() => state.editContact(contact, context);
     return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        leading: CupertinoNavigationBarBackButton(
-          previousPageTitle: 'Home',
-          onPressed: () {
-            Navigator.of(context).maybePop();
-          },
-        ),
-        middle: const Text('Sample'),
-        trailing: Material(
-          child: IconButton(
-            icon: const Icon(Icons.delete),
+      child: CustomScrollView(slivers: <Widget>[
+        CupertinoSliverNavigationBar(
+          leading: CupertinoNavigationBarBackButton(
+            previousPageTitle: 'Home',
             onPressed: () {
-              showBox(text: 'Delete this contact?', context: context)
-                  .then((bool delete) {
-                if (delete) {
-                  contact.delete().then((_) {
-                    Navigator.of(context).maybePop();
-                  });
-                }
-              });
+              Navigator.of(context).maybePop();
             },
           ),
+          largeTitle: Text(
+              '${contact.givenName.value ?? ''}  ${contact.familyName.value ?? ''}'),
+          trailing: Material(
+            child: IconButton(
+              icon: const Icon(Icons.delete),
+              onPressed: () {
+                showBox(text: 'Delete this contact?', context: context)
+                    .then((bool delete) {
+                  if (delete) {
+                    contact.delete().then((_) {
+                      Navigator.of(context).maybePop();
+                    });
+                  }
+                });
+              },
+            ),
+          ),
         ),
-      ),
-      child: CustomScrollView(slivers: <Widget>[
         SliverList(
           delegate: SliverChildListDelegate(<Widget>[
             contact.givenName.onListTile(tap: onTap),

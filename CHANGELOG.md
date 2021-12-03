@@ -1,4 +1,9 @@
 
+## 2.4.0
+ December 02, 2021
+- Adjusted contact_details.dart
+- Future<void> _deleteContact(WidgetTester tester) async {
+
 ## 2.3.0
  November 30, 2021
 - New tests under test/
