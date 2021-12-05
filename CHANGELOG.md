@@ -1,4 +1,9 @@
 
+## 2.4.0+02
+ December 04, 2021
+- var tile = tester.widget<CupertinoListTile>(finder.first);
+- if (App.useCupertino) {
+
 ## 2.4.0
  December 02, 2021
 - Adjusted contact_details.dart

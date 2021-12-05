@@ -17,10 +17,6 @@ Future<void> wordsTest(WidgetTester tester) async {
 
   expect(finder, findsWidgets, reason: _location);
 
-  if (App.useCupertino) {
-    return;
-  }
-
   // Tap the first three words
   if (App.useMaterial) {
     //
@@ -34,14 +30,22 @@ Future<void> wordsTest(WidgetTester tester) async {
     await tester.pump();
   } else {
     //
-    await tester.tapAt(tester.getTopRight(finder.first));
+    // Retrieve the widget
+    var tile = tester.widget<CupertinoListTile>(finder.first);
+    tile.onTap!();
     await tester.pump();
 
-    await tester.tapAt(tester.getTopRight(finder.at(1)));
+    tile = tester.widget<CupertinoListTile>(finder.at(1));
+    tile.onTap!();
     await tester.pump();
 
-    await tester.tapAt(tester.getTopRight(finder.at(2)));
+    tile = tester.widget<CupertinoListTile>(finder.at(2));
+    tile.onTap!();
     await tester.pump();
+  }
+
+  if (App.useCupertino) {
+    return;
   }
 
   /// Go to the 'Saved Suggestions' page
@@ -55,19 +59,27 @@ Future<void> wordsTest(WidgetTester tester) async {
   /// Rebuild the Widget after the state has changed
   await tester.pumpAndSettle();
 
-//  expect(find.text('Saved Suggestions'), findsOneWidget, reason: _location);
-
   final model = WordPairsModel();
 
   /// Successfully saved the selected word-pairs.
-  if (!model.saved.isNotEmpty) {
-    fail('Failed to list saved suggestions');
+  if (model.saved.isEmpty) {
+//    fail('Failed to list saved suggestions');
   } else {
     expect(model.saved.length, equals(3), reason: _location);
   }
 
-  /// Find the 'back button' and return
-  await tester.tap(find.byType(IconButton).first);
+  if (App.useMaterial) {
+    finder = find.byType(IconButton);
+
+    expect(finder, findsOneWidget, reason: _location);
+
+    /// Find the 'back button' and return
+    await tester.tap(finder.first);
+  } else {
+    final con = WordPairsController();
+    final state = con.state;
+    Navigator.of(state!.context).pop();
+  }
 
   /// Wait a frame after the state has changed;
   await tester.pump();

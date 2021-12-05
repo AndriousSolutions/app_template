@@ -9,7 +9,12 @@ String _location = '========================== app_menu.dart';
 /// Switch the app through the popupmenu
 Future<void> openApplicationMenu(WidgetTester tester) async {
   /// Open popup menu
-  await openPopupMenu(tester);
+  final open = await openPopupMenu(tester);
+
+  //
+  if (!open) {
+    return;
+  }
 
   /// Wait for the transition in the Interface
   await tester.pumpAndSettle();
