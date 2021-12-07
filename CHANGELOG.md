@@ -1,4 +1,8 @@
 
+## 2.4.0+03
+ December 05, 2021
+- Removed contacts_example
+
 ## 2.4.0+02
  December 04, 2021
 - var tile = tester.widget<CupertinoListTile>(finder.first);

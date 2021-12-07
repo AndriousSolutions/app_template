@@ -25,8 +25,6 @@ export 'tests/words_test.dart';
 
 export 'tests/contacts_test.dart';
 
-export 'tests/menu/menu_tests.dart';
-
 /// Menu Tests
 export 'tests/menu/open_menu.dart';
 
